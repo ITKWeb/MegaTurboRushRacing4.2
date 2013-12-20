@@ -18,10 +18,12 @@ $(function() {
 });
 
 function collision_ui(voiture, enemy){
-    var point_voiture_x = parseInt(voiture.style.left);
-    var point_voiture_y = parseInt(voiture.style.top);
     var point_enemy_x = parseInt(enemy.style.left);
     var point_enemy_y = parseInt(enemy.style.top);
+
+    var point_voiture_x = parseInt(voiture.style.left);
+    var point_voiture_y = parseInt(voiture.style.top);
+
 
     console.log("point_voiture_x = " + point_voiture_x.toString());    
     console.log("point_voiture_y = " + point_voiture_y.toString());
@@ -32,6 +34,7 @@ function collision_ui(voiture, enemy){
 	{
 	    if (((point_voiture_y > point_enemy_y) && (point_voiture_y < (point_enemy_y + carHeight)))) {
     		alert("Collision !");
+		window.location = "index.html";
 	    }
 	}
 }
