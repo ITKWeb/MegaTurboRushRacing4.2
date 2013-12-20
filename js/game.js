@@ -27,15 +27,15 @@ function collision_ui(voiture, enemy){
     if (((point_voiture_x => point_enemy_x) && (point_voiture_x <= (point_enemy_x + carWidth))))
 	{
 	    if (((point_voiture_y => point_enemy_y) && (point_voiture_y <= (point_enemy_y + carHeight)))) {
-    		alert("Collision !");
-		window.location = "index.html";
+    		//alert("Collision !");
+		window.location = "gameover.html";
 	    }
 	}
     else{
 	if(((point_enemy_x <= (point_voiture_x + carWidth)) && ((point_voiture_x + carWidth) <= (point_enemy_x + carWidth)))) {
 	    if (((point_enemy_y <= point_voiture_y) && (point_voiture_y <= (point_enemy_y + carHeight)))) {
-		alert("Collisition à droite !!!!");
-		window.location = "index.html";   
+		//alert("Collisition à droite !!!!");
+		window.location = "gameover.html";   
 	    }
 	}
     } 
