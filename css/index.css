@@ -7,6 +7,27 @@ html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abb
 
 
 
+
+
+/*------------------------------------*\
+    FONT 
+\*------------------------------------*/
+
+@font-face {
+    font-family: 'minstrel';
+    src: url('font/MINSPSW_-webfont.eot');
+    src: url('font/MINSPSW_-webfont.eot?#iefix') format('embedded-opentype'),
+         url('font/MINSPSW_-webfont.woff') format('woff'),
+         url('font/MINSPSW_-webfont.ttf') format('truetype'),
+         url('font/MINSPSW_-webfont.svg#minstrelposterwhgregular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+
+
+
 /*------------------------------------*\
     GLOBAL
 \*------------------------------------*/
@@ -36,12 +57,12 @@ body{
     display: inline-block;
     padding:10px;
     border-radius: 10px;
-    border:10px solid transparent;
     font-size: 1.8em;
     color: #fff;
     text-decoration: none;
-    font-weight: bold;
+    font-family: 'minstrel',sans-serif;
 }
 .start:focus,.start:hover{
-    border-color: #cf0303;
+    background: #fff;
+    color: #950202;
 }
