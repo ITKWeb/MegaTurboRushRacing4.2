@@ -19,7 +19,7 @@ function MouvementPlayer(keyCode){
             }
         }
         else if(keyCode == CODE_TOUCHE_DROITE){
-            if(parseInt(voiture.style.left)+20 <= 900){
+            if(parseInt(voiture.style.left)+20 <= 579){
                 horizontalCalc = parseInt(voiture.style.left) + move;
             }
         }
