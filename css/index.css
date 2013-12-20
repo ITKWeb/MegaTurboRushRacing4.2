@@ -23,47 +23,25 @@ html{
 \*------------------------------------*/
 
 body{
-	background: url("../images/grass.png");
+	background: url("../images/asphalt.png");
 	height: 100%;
 	position:relative;
+    text-align: center;
 }
 
-.road{
-	background: url("../images/road.png");
-	width: 950px;
-	height: 100%;
-	margin: 0 auto;
-	min-height: 700px;
+.logo{
+    padding:80px 0 20px;
 }
-
-
-.bg-animation{
-    animation: runBackground 1s linear infinite;
-    -webkit-animation: runBackground 1s linear infinite;
+.start{
+    display: inline-block;
+    padding:10px;
+    border-radius: 10px;
+    border:10px solid transparent;
+    font-size: 1.8em;
+    color: #fff;
+    text-decoration: none;
+    font-weight: bold;
 }
-
-@-webkit-keyframes runBackground {
-    0% { background-position: 0 0px; }
-    100% { background-position: 0 256px; }
+.start:focus,.start:hover{
+    border-color: #cf0303;
 }
-@keyframes runBackground {
-    0% { background-position: 0 0px; }
-    100% { background-position: 0 256px; }
-}
-
-
-
-
-/*------------------------------------*\
-    VEHICULE
-\*------------------------------------*/
-
-.vehiculeEnemy {
-    width : 100px;
-    /* height : 150px; */
-    padding-top : 150px;
-    background-color: red;
-    left : 20%;
-    position : fixed;
-}
-
