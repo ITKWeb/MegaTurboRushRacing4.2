@@ -5,9 +5,9 @@ $(function() {
     var interval = setInterval(function() {
 	start++;
 	enemy.style.top = start.toString() + "px";
-	if (start == window.innerHeight) {
+	if (start == 600) {
 	    clearInterval(interval);
 	    enemy.style.display = "none";
 	}
-    }, 0);
+    }, 1);
 });

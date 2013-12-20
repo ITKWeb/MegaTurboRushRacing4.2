@@ -33,6 +33,8 @@ body{
 	height: 100%;
 	margin: 0 auto;
 	min-height: 700px;
+	position : relative;
+	overflow : hidden;
 }
 
 
@@ -59,10 +61,8 @@ body{
 
 .vehiculeEnemy {
     width : 100px;
-    /* height : 150px; */
     padding-top : 150px;
     background-color: red;
-    left : 20%;
-    position : fixed;
+    position : absolute;
 }
 
