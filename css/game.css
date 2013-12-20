@@ -49,7 +49,7 @@ body{
 
 .road{
 	background: url("../images/road.png");
-	width: 950px;
+	width: 629px;
 	height: 100%;
 	margin: 0 auto;
 	min-height: 700px;
@@ -65,11 +65,11 @@ body{
 
 @-webkit-keyframes runBackground {
     0% { background-position: 0 0px; }
-    100% { background-position: 0 256px; }
+    100% { background-position: 0 215px; }
 }
 @keyframes runBackground {
     0% { background-position: 0 0px; }
-    100% { background-position: 0 256px; }
+    100% { background-position: 0 215px; }
 }
 
 
@@ -89,12 +89,8 @@ body{
 
 #voiture{
 	position:absolute;
-	background-color:black;
-	width: 50px;
-	height: 80px;
 	bottom: 20px;
-	left:300px;
-	transition: left 200ms;
+    background-color:black;
 }
 
 
