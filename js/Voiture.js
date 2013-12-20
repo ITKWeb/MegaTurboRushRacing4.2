@@ -27,7 +27,7 @@ function MouvementPlayer(keyCode){
         voiture.style.left = horizontalCalc.toString() + "px";
 
         /*if(keyCode == CODE_TOUCHE_HAUT){
-            verticalCalc = parseInt(voiture.style.bottom) + move;
+            verticalCalc = parseInt(voiture.style.bottom) + move; 
         }
         else if(keyCode == CODE_TOUCHE_BAS){
             verticalCalc = parseInt(voiture.style.bottom) - move;
