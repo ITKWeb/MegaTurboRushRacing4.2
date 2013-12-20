@@ -4,8 +4,8 @@ $(function() {
     enemy.style.left = "300px";
     var start = parseInt(enemy.style.top);
     var voiture = document.getElementById('voiture');
-    // voiture.style.top = "300px";
-    // voiture.style.left = "0px";
+    voiture.style.top = (window.innerHeight - carHeight * 2).toString() + "px";
+    voiture.style.left = "0px";
     var interval = setInterval(function() {
 	start++;
 	collision_ui(voiture, enemy);
