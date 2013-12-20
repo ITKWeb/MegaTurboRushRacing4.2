@@ -61,9 +61,18 @@ body{
 \*------------------------------------*/
 
 .vehiculeEnemy {
-    width : 100px;
-    padding-top : 150px;
+    width : 50px;
+    height : 80px;
     background-color: red;
     position : absolute;
+    left : 70px;
 }
 
+.testVehicule {
+    width : 50px;
+    height : 80px;
+    bottom : 0;
+    background-color: green;
+    position : absolute;
+    left : 70px;
+}
