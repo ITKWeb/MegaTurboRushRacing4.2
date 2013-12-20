@@ -87,14 +87,6 @@ body{
     left : 70px;
 }
 
-.testVehicule {
-    width : 50px;
-    height : 80px;
-    bottom : 0;
-    background-color: green;
-    position : absolute;
-    left : 70px;
-}
 #voiture{
 	position:absolute;
 	background-color:black;
