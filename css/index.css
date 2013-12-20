@@ -27,6 +27,8 @@ html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abb
 }
 
 
+.special-font{font-family: 'minstrel',sans-serif;}
+
 
 
 /*------------------------------------*\
@@ -61,9 +63,16 @@ body{
     font-size: 1.8em;
     color: #fff;
     text-decoration: none;
-    font-family: 'minstrel',sans-serif;
 }
 .start:focus,.start:hover{
     background: #fff;
     color: #950202;
+}
+
+.gameover{
+    color: #FFF;
+    font-size: 4em;
+    display: inline-block;
+    text-decoration: none;
+    padding-top: 200px;
 }
