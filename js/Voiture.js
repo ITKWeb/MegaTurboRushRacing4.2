@@ -1,6 +1,6 @@
 $(function(){
     var voiture = $("#voiture")[0];
-    voiture.style.left = (window.innerWidth / 2 - 25) + "px" ;
+    voiture.style.left = "100px" ;
     voiture.style.bottom = "20px";
 });
 
