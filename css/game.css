@@ -68,6 +68,7 @@ body{
     left : 70px;
 }
 
+<<<<<<< HEAD
 .testVehicule {
     width : 50px;
     height : 80px;
@@ -75,4 +76,13 @@ body{
     background-color: green;
     position : absolute;
     left : 70px;
+=======
+#voiture{
+	position:absolute;
+	background-color:black;
+	width: 50px;
+	height: 80px;
+	top:50%;
+	left:300px;
+>>>>>>> 14a51865c5e72a715dba04560d11d59bfeb1d2a8
 }
