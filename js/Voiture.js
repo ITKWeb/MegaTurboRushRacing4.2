@@ -14,12 +14,12 @@ $(function(){
 
 function MouvementPlayer(keyCode){
         if(keyCode == CODE_TOUCHE_GAUCHE){
-            if(parseInt(voiture.style.left) >= 0){
+            if(parseInt(voiture.style.left)-20 >= 0){
                 horizontalCalc = parseInt(voiture.style.left) - move;
             }
         }
         else if(keyCode == CODE_TOUCHE_DROITE){
-            if(parseInt(voiture.style.left) <= 900){
+            if(parseInt(voiture.style.left)+20 <= 900){
                 horizontalCalc = parseInt(voiture.style.left) + move;
             }
         }
