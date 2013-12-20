@@ -1,5 +1,6 @@
-MegaTurboRushRacing4.2
-======================
+
+![MegaTurboRushRacing4.2](https://raw.github.com/ITKWeb/MegaTurboRushRacing4.2/master/images/logo-MegaTurboRushRacing4.2.png)
+
 
 Un jeu qui poutre.
 
