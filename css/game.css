@@ -138,7 +138,7 @@ body{
     font-family: sans-serif;
     color:white;
     font-size: 30px;
-    margin: 50px 0px 0px 50px;
+    margin: 100px 0px 0px 50px;
 }
 
 /*------------------------------------*\
@@ -147,8 +147,103 @@ body{
 
 .gauge{
     position: absolute;
-    margin: 100px 0px 0px 50px;
+    margin: 150px 0px 0px 50px;
     font-family: sans-serif;
     color:white;
     font-size: 30px;
+
+}
+
+.gameOver{
+     border:10px solid;
+    border-image:url("../images/grass.png") 10 10 round;
+    background: url("../images/asphalt.png");
+    position: absolute;
+    z-index: 3;
+    width: 400px;
+    height: 400px;
+    overflow: hidden;
+    margin: auto;
+     top: 0; left: 0; bottom: 0; right: 0;
+    color: #FFF;
+    font-size: 2.5em;
+    display: inline-block;
+    text-decoration: none;
+    text-align: center;
+    display:none;
+ 
+}
+
+.start{
+    display: inline-block;
+    padding:10px;
+    border-radius: 10px;
+    font-size: 0.7em;
+    color: #fff;
+    text-decoration: none;
+}
+.start:focus,.start:hover{
+    background: #fff;
+    color: #950202;
+}
+
+
+.levelUp{
+     border:10px solid;
+    border-image:url("../images/grass.png") 10 10 round;
+    background: url("../images/asphalt.png");
+    position: absolute;
+    z-index: 2;
+    width: 400px;
+    height: 50px;
+    overflow: hidden;
+    margin:0 auto;
+    top: 30px; left: 0; bottom: 0; right: 0;
+    color: #FFF;
+    font-size: 2.5em;
+    display: inline-block;
+    text-decoration: none;
+    text-align: center;
+     display:none;
+ 
+}
+
+
+.level{
+    position: absolute;
+    font-family: sans-serif;
+    color:white;
+    font-size: 30px;
+    margin: 50px 0px 0px 50px;
+}
+
+
+/*------------------------------------*\
+    FUEL
+\*------------------------------------*/
+
+.fuel{
+    position : absolute;
+    width: 50px;
+    height: 90px;
+    background: url("../images/fuel.png");
+}
+
+
+#explosionImg
+{
+    position: absolute;
+    display:none;
+    z-index: 2;
+}
+
+
+#watImg
+{
+    display: inline-block;
+    position: absolute;
+    display:none;
+    z-index: 2;
+    margin: auto;
+    top: 0; left: 0; bottom: 0; right: 0;
 }

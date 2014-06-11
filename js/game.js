@@ -1,11 +1,21 @@
 
 var ennemyFactory;
+var fuelFactory;
 var voiture;
 var  gameMap;
 var spawnEnnemiesIntervalID;
 var gameIntervalID;
+var levelUpIntervalID;
 var gauge;
 var score;
+var gameOverScreen;
+var gameSpeed;
+var level;
+var levelElement;
+var levelUpScreen;
+var explosionElement;
+var konamiElement;
+ var keys = [];
 
 function buildCard() {
   var div = document.createElement('div');
@@ -21,7 +31,8 @@ function addEnemy() {
  
   ennemy.setWidth(carWidth);
   ennemy.setHeight(carHeight);
-  
+  //ennemy.setLeft(random(gameMapBorderWidth, gameMapWidth - 2*gameMapBorderWidth));
+
   var collide = false;
     ennemy.setLeft(random(gameMapBorderWidth, gameMapWidth - 2*gameMapBorderWidth));
   do
@@ -42,12 +53,25 @@ function addEnemy() {
   ennemy.setVisible(true);
  }
 
+ function addFuel()
+ {
+
+  var fuel = fuelFactory.createFuel();
+  fuel.setTop(random(-fuelHeight,2* -fuelHeight));
+
+  fuel.setWidth(fuelWidth);
+  fuel.setHeight(fuelHeight);
+
+  fuel.setLeft(random(gameMapBorderWidth, gameMapWidth - 2*gameMapBorderWidth));
+
+ }
 
 function stopGame()
 {
   //On stop les intervals
   clearInterval(gameIntervalID);
   clearInterval(spawnEnnemiesIntervalID);
+  clearInterval(levelUpIntervalID);
 
   //On stop le score et la gauge
   score.stop();
@@ -59,17 +83,43 @@ function stopGame()
 
   //On stop les keys
   window.onkeydown = null;
+
+  gameOverScreen.show();
 }
 
 function random(min, max) {
   return Math.floor((Math.random()*max)+min);
 }
 
+function onKeyDown(e)
+{
+    //Traite les touches pour la voiture
+    MouvementPlayer(e.keyCode);
+
+    //Ajoute une touche
+    keys.push(e.keyCode);
+
+    //Test si les touches correspondent au konami code
+    if (keys.toString().indexOf(konami) >= 0) 
+    {
+        konamiElement.style.display ='block';
+        keys = [];
+    };
+    
+}
+
 $(function() {
 
-    window.onkeydown = function(e){
-        MouvementPlayer(e.keyCode);
-    }
+    window.onkeydown = onKeyDown;
+
+
+  //Instanciation des objets
+
+  levelUpScreen = new LevelUpScreen($("#levelUpDiv")[0]);
+
+  explosionElement = $("#explosionImg")[0];
+  levelElement =$("#levelDiv")[0];
+  konamiElement = $("#watImg")[0];
 
   score = new Score($("#score")[0]);
   score.start();
@@ -77,8 +127,11 @@ $(function() {
   gauge = new FuelGauge( $("#progress")[0]);
   gauge.start();
 
+  gameOverScreen = new GameOverScreen($("#gameOverDiv")[0]);
+
   gameMap = document.getElementsByClassName('road')[0];
   ennemyFactory = new EnnemyFactory(gameMap);
+  fuelFactory = new FuelFactory(gameMap);
 
   var voitureDiv = document.getElementById('voiture');
   voitureDiv.style.top = (window.innerHeight - carHeight * 2).toString() + "px";
@@ -88,9 +141,44 @@ $(function() {
   voiture.setWidth(carWidth);
   voiture.setHeight(carHeight);
   
-   addEnemy();
-  
-  spawnEnnemiesIntervalID = setInterval(function() {
+  level = 1;
+  gameSpeed = 3;
+  levelElement.textContent = "Level 1";
+
+  //On ajoute le premier ennemi manuellement
+  addEnemy();
+ 
+ 
+  initSpawnEnnemiesInterval();
+  initGameInterval();
+  initLevelUpInterval();
+
+   
+
+});
+
+
+function levelUp()
+{
+  level = level + 1;
+  gameSpeed = gameSpeed + 0.75;
+  levelElement.textContent = "Level " + level;
+  levelUpScreen.show();
+}
+
+
+function initLevelUpInterval()
+{
+  levelUpIntervalID = setInterval(function()
+  {
+    levelUp();
+  },levelUpInterval);
+}
+
+function initSpawnEnnemiesInterval()
+{
+
+ spawnEnnemiesIntervalID = setInterval(function() {
 
 
     if(ennemyFactory.ennemies.length < maxEnememies)
@@ -99,15 +187,24 @@ $(function() {
             addEnemy();
     }
 
+    if(fuelFactory.fuels.length < maxFuels)
+    {
+        if(random(0,1000)<10){
+            addFuel();
+        }
+    }
   },50);
+}
 
-  gameIntervalID = setInterval(function() {
+function initGameInterval()
+{
+   gameIntervalID = setInterval(function() {
 
 
     ennemyFactory.executeOnEnnemies(function(oneEnnemy) {
 
       //On bouge la caisse
-      oneEnnemy.moveTopBy(3);
+      oneEnnemy.moveTopBy(gameSpeed);
 
       if(oneEnnemy.getTop() >=window.innerHeight )
       {
@@ -125,16 +222,43 @@ $(function() {
           if(oneEnnemy.collideWith(voiture))
           {
             stopGame();
+           
+            explosionElement.style.top = voiture.getTop() - 40 + "px";
+            explosionElement.style.left = voiture.getLeft() - 40 + "px";
+             explosionElement.style.display ='block';
+            //voiture.setVisible(false);
+
             //window.location = "gameover.html";   
           }
       }
 
-    if (gauge.getValue() ==0 )
-    {
-      stopGame();
-    }
+      if (gauge.getValue() ==0 )
+      {
+        stopGame();
+      }
 
     });
-  }, timeInterval);
 
-});
+  fuelFactory.executeOnFuels(function(oneFuel) {
+
+      //On bouge la caisse
+      oneFuel.moveTopBy(3);
+
+      if(oneFuel.getTop() >=window.innerHeight )
+      {
+        oneFuel.remove();
+   
+      }
+      else
+      {
+
+          if(oneFuel.collideWith(voiture))
+          {
+            oneFuel.remove();
+            gauge.increaseFuelBy(50);
+          }
+      }
+    });
+
+  }, timeInterval);
+}

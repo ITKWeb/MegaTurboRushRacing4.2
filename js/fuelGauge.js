@@ -32,3 +32,8 @@ FuelGauge.prototype.start = function()
 		that.decreaseFuelBy(1);
 		},200);
 }
+
+FuelGauge.prototype.increaseFuelBy = function(v)
+{
+	this.gauge.value = this.gauge.value + v;
+}

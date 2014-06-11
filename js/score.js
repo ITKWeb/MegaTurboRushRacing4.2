@@ -11,7 +11,7 @@ function Score (label)
 Score.prototype.increment = function(value)
 {
 	points += value;
-    scoreLabel.textContent = "SCORE: " + points; 
+    scoreLabel.textContent = "Score: " + Math.floor( points); 
 }
 
 Score.prototype.stop = function()
@@ -24,7 +24,7 @@ Score.prototype.start = function()
 	var that = this;
 
 	 this.scoreIntervalID = setInterval(function() {
-		that.increment(100);
+		that.increment(31.7);
 		},200);
 }
 

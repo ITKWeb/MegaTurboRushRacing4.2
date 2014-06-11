@@ -8,7 +8,7 @@ $(function(){
     var CODE_TOUCHE_DROITE = 39; //Keycode pour la touche droite
     var CODE_TOUCHE_HAUT = 38; //Keycode pour la touche haut
     var CODE_TOUCHE_BAS = 40; //Keycode pour la touche bas
-    var move = 10; //Nombre de pixels que l'on déplace la voiture
+    var move = 20; //Nombre de pixels que l'on déplace la voiture
     var horizontalCalc;
     var road = 900;
 
@@ -17,7 +17,7 @@ function MouvementPlayer(keyCode){
     var left = voiture.getLeft();
         if(keyCode == CODE_TOUCHE_GAUCHE)
         {
-            if(left - 20 >= 0)
+            if(left - (20) >= 0)
             {
                 horizontalCalc = left - move;
             }

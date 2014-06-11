@@ -5,24 +5,46 @@
 
 	<link rel="icon" type="image/png" href="images/icon.png" />
 	<link rel="stylesheet" type="text/css" href="css/game.css" />
+	<script src="js/LevelUpScreen.js"></script>
 	<script src="js/values.js"></script>
+	<script src="js/GameOverScreen.js"></script>
 	<script src="js/classes.js"></script>
 	<script src="js/ki.min.js"></script>
 	<script src="js/game.js"></script>
 	<script src="js/Voiture.js"></script>
 	<script src="js/Score.js"></script>
 	<script src="js/FuelGauge.js"></script>
+	<script src="js/Fuel.js"></script>
 	<title>MegaTurboRushRacing4.2</title>
   </head>
   <body class="bg-animation">
-  	<div id="score" class="score"></div>
+  	<img  id ="watImg" src="images/wat.gif" />
+  	<div id ="gameOverDiv" class ="gameOver" >
+  		<br />
+		<a class="gameover special-font">GAME OVER</a>
+		<br />
+		<br />
+		<br />
+		<a href="game.html" class="start special-font" >Restart</a>
+		<br />
+		<br />
+		<br />
+		<a href="index.html" class="start special-font">Menu</a>
+  	</div>
+
+  	 <div id ="levelUpDiv" class ="levelUp" >
+		<a class="gameover special-font">LEVEL UP</a>
+  	</div>
+
+  	<div id="levelDiv" class="level">Level</div>
+  	<div id="score" class="score">Score</div>
   	<div class="gauge">
-  		FUEL  <meter id="progress" value="100" min="0" max="100" low="30" high="70" optimum="80"></meter>  
+  		Fuel  <meter id="progress" value="100" min="0" max="100" low="30" high="70" optimum="80"></meter>  
   	</div>
 	<div class="road bg-animation">
 
 	  	<!--<div class="vehiculeEnemy car" id="vehiculeEnemy" onclick="deplacerVehicule();"></div>-->
-
+		<img  id ="explosionImg" src="images/explosion.gif" />
 	  	<div id="voiture" class="car"></div>
 	  </div>
 	</div>
