@@ -13,18 +13,24 @@ $(function(){
     var road = 900;
 
 function MouvementPlayer(keyCode){
-        if(keyCode == CODE_TOUCHE_GAUCHE){
-            if(parseInt(voiture.style.left)-20 >= 0){
-                horizontalCalc = parseInt(voiture.style.left) - move;
+
+    var left = voiture.getLeft();
+        if(keyCode == CODE_TOUCHE_GAUCHE)
+        {
+            if(left - 20 >= 0)
+            {
+                horizontalCalc = left - move;
             }
         }
-        else if(keyCode == CODE_TOUCHE_DROITE){
-            if(parseInt(voiture.style.left)+20 <= 579){
-                horizontalCalc = parseInt(voiture.style.left) + move;
+        else if(keyCode == CODE_TOUCHE_DROITE)
+        {
+            if(left +20 <= 579)
+            {
+                horizontalCalc = left + move;
             }
         }
         
-        voiture.style.left = horizontalCalc.toString() + "px";
+        voiture.setLeft( horizontalCalc)
 
         /*if(keyCode == CODE_TOUCHE_HAUT){
             verticalCalc = parseInt(voiture.style.bottom) + move; 
@@ -35,6 +41,3 @@ function MouvementPlayer(keyCode){
         voiture.style.bottom = verticalCalc.toString() + "px"; DEPLACEMENT VERTICAL*/
 }
 
-window.onkeydown = function(e){
-    MouvementPlayer(e.keyCode);
-}

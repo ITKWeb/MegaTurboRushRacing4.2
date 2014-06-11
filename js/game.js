@@ -1,3 +1,12 @@
+
+var ennemyFactory;
+var voiture;
+var  gameMap;
+var spawnEnnemiesIntervalID;
+var gameIntervalID;
+var gauge;
+var score;
+
 function buildCard() {
   var div = document.createElement('div');
   div.classList.add('vehiculeEnemy');
@@ -6,33 +15,50 @@ function buildCard() {
 }
 
 function addEnemy() {
-  var div = document.createElement('div');
-  div.classList.add('vehiculeEnemy');
-  div.classList.add('car');
-  document.getElementsByClassName('road')[0].appendChild(div);
-  var top = 0;
-  var left = random(0, 600);
-  function updatePosition() {
-    div.style.top = top + 'px';
-    div.style.left = left + 'px';
-  }
-  updatePosition();
-  return {
-    moveTopBy: function(t) {
-      top = top + t;
-      updatePosition();
-      return top;
-    },
-    die: function() {
-      document.getElementsByClassName('road')[0].removeChild(div);
-    },
-    left: function() {
-      return left;
-    },
-    top: function() {
-      return top;
-    }
-  };
+
+  var ennemy = ennemyFactory.createEnnemy();
+  ennemy.setTop(random(-carHeight,2* -carHeight));
+ 
+  ennemy.setWidth(carWidth);
+  ennemy.setHeight(carHeight);
+  
+  var collide = false;
+    ennemy.setLeft(random(gameMapBorderWidth, gameMapWidth - 2*gameMapBorderWidth));
+  do
+  {
+  
+    ennemyFactory.executeOnEnnemies(function(oneEnnemy) {
+
+        if(ennemy != oneEnnemy)
+        {
+          if( ennemy.collideWith(oneEnnemy))
+            ennemy.remove();
+        }
+
+
+    });
+  } while(collide)
+
+  ennemy.setVisible(true);
+ }
+
+
+function stopGame()
+{
+  //On stop les intervals
+  clearInterval(gameIntervalID);
+  clearInterval(spawnEnnemiesIntervalID);
+
+  //On stop le score et la gauge
+  score.stop();
+  gauge.stop();
+
+  //On stop les animations
+  document.body.classList.remove("bg-animation");
+  gameMap.classList.remove("bg-animation");
+
+  //On stop les keys
+  window.onkeydown = null;
 }
 
 function random(min, max) {
@@ -40,46 +66,75 @@ function random(min, max) {
 }
 
 $(function() {
-  var enemy = addEnemy();
-  
-  var voiture = document.getElementById('voiture');
-  voiture.style.top = (window.innerHeight - carHeight * 2).toString() + "px";
-  voiture.style.left = "0px";
 
-  var interval = setInterval(function() {
-    var start = enemy.moveTopBy(3);
-    collision_ui(voiture, enemy);
-    if (start >= window.innerHeight) {
-        //clearInterval(interval);
-        enemy.die();
-        enemy = addEnemy();
+    window.onkeydown = function(e){
+        MouvementPlayer(e.keyCode);
     }
+
+  score = new Score($("#score")[0]);
+  score.start();
+
+  gauge = new FuelGauge( $("#progress")[0]);
+  gauge.start();
+
+  gameMap = document.getElementsByClassName('road')[0];
+  ennemyFactory = new EnnemyFactory(gameMap);
+
+  var voitureDiv = document.getElementById('voiture');
+  voitureDiv.style.top = (window.innerHeight - carHeight * 2).toString() + "px";
+  voitureDiv.style.left = "0px";
+
+  voiture = new Ennemy(voitureDiv,null);
+  voiture.setWidth(carWidth);
+  voiture.setHeight(carHeight);
+  
+   addEnemy();
+  
+  spawnEnnemiesIntervalID = setInterval(function() {
+
+
+    if(ennemyFactory.ennemies.length < maxEnememies)
+    {
+        if(random(0,1000)<20)
+            addEnemy();
+    }
+
+  },50);
+
+  gameIntervalID = setInterval(function() {
+
+
+    ennemyFactory.executeOnEnnemies(function(oneEnnemy) {
+
+      //On bouge la caisse
+      oneEnnemy.moveTopBy(3);
+
+      if(oneEnnemy.getTop() >=window.innerHeight )
+      {
+        oneEnnemy.remove();
+
+        //Il doit au moins y avoir minEnemies sur le terrain
+        if(ennemyFactory.ennemies.length < minEnememies )
+        {
+                addEnemy();
+        }
+   
+      }else
+      {
+
+          if(oneEnnemy.collideWith(voiture))
+          {
+            stopGame();
+            //window.location = "gameover.html";   
+          }
+      }
+
+    if (gauge.getValue() ==0 )
+    {
+      stopGame();
+    }
+
+    });
   }, timeInterval);
+
 });
-
-function intersectRect(a, b) {
-  return (a.left <= b.right &&
-          b.left <= a.right &&
-          a.top <= b.bottom &&
-          b.top <= a.bottom)
-}
-
-function collision_ui(voiture, enemy){
-  var p_enemy = {
-    left: enemy.left(),
-    right: (enemy.left() + carWidth),
-    top: enemy.top(),
-    bottom: (enemy.top() + carHeight)
-  };
-
-  var p_voiture = {
-    left: parseInt(voiture.style.left),
-    right: (parseInt(voiture.style.left, 10) + carWidth),
-    top: parseInt(voiture.style.top),
-    bottom: (parseInt(voiture.style.top, 10) + carHeight)
-  };
-
-  if(intersectRect(p_enemy, p_voiture)) {
-    window.location = "gameover.html";   
-  }
-}
