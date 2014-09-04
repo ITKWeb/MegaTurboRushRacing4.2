@@ -196,6 +196,25 @@ function initSpawnEnnemiesInterval()
   },50);
 }
 
+//Save the best score into the browser sessionstorage
+function saveScore(score){
+  var displayBest;
+
+  if(typeof sessionStorage.score=='undefined') {
+     sessionStorage.setItem("score", score);
+      displayBest = score;
+  }
+  else{
+      if(score > sessionStorage.score){
+        sessionStorage.setItem("score", score);
+        $("#labelScore")[0].innerHTML = "<div class=\"highestScore beatHighestScore\">NEW BEST SCORE</blink>";
+      }
+      displayBest = sessionStorage.score;
+  }
+  
+  $("#bestScore")[0].innerHTML = displayBest;
+}
+
 function initGameInterval()
 {
    gameIntervalID = setInterval(function() {
@@ -221,6 +240,8 @@ function initGameInterval()
 
           if(oneEnnemy.collideWith(voiture))
           {
+            
+            saveScore(score.getScore());
             stopGame();
            
             explosionElement.style.top = voiture.getTop() - 40 + "px";
@@ -234,6 +255,7 @@ function initGameInterval()
 
       if (gauge.getValue() ==0 )
       {
+        saveScore(score.getScore());
         stopGame();
       }
 
