@@ -202,12 +202,13 @@ function saveScore(score){
 
   if(typeof sessionStorage.score=='undefined') {
      sessionStorage.setItem("score", score);
-      displayBest = score;
+     displayBest = score;
+	 $("#labelScore")[0].innerHTML = "<div class=\"highestScore beatHighestScore\">NEW BEST SCORE</div>";
   }
   else{
       if(score > sessionStorage.score){
         sessionStorage.setItem("score", score);
-        $("#labelScore")[0].innerHTML = "<div class=\"highestScore beatHighestScore\">NEW BEST SCORE</blink>";
+        $("#labelScore")[0].innerHTML = "<div class=\"highestScore beatHighestScore\">NEW BEST SCORE</div>";
       }
       displayBest = sessionStorage.score;
   }
