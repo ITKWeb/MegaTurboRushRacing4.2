@@ -28,3 +28,7 @@ Score.prototype.start = function()
 		},200);
 }
 
+Score.prototype.getScore = function(){
+	return Math.floor(points);
+}
+
